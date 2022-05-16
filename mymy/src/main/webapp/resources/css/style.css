@@ -1,0 +1,390 @@
+@charset "utf-8";
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+    color: #222;
+    overflow: hidden;
+    cursor: url("https://cur.cursors-4u.net/cursors/cur-9/cur817.cur"), auto;
+}
+
+ul, ol{
+    list-style: none;
+}
+
+img{
+    width: 100%;
+    height: auto;
+    vertical-align: top;
+    border: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+input{
+    /* 인라인 블럭 : img, input */
+    font-family: 'Noto Sans KR', sans-serif;
+    vertical-align: top;
+}
+
+.hide{
+    display: block; /* span 태그라면 */
+    position: absolute;
+    top: -99999px;
+    left: -99999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+fieldset{
+    border: 0;
+}
+
+legend{
+    display: none;
+}
+
+/* reset end */
+
+/* mobile */
+
+.pc, .board_pc{
+    display: none;
+}
+
+#wrap{
+    position: relative;
+    width: 100%;
+}
+
+#header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    z-index: 500;
+}
+
+#headerIn{
+    height: 60px;
+    background-color: transparent;
+}
+
+.logo{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.logo a{
+    display: block;
+    height: 35px;
+    line-height: 35px;
+    color: #000;
+    font-size: 20px;
+}
+
+.util .h_login{
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    text-indent: -99999px;
+    width: 30px;
+    height: 30px;
+    background-image: url("../img/h_login.png");
+    background-size: 20px auto;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.util .h_logout{
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    text-indent: -99999px;
+    width: 30px;
+    height: 30px;
+    background-image: url("../img/h_logout.png");
+    background-size: 20px auto;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+.util ul{
+    margin-right: 15px;
+    margin-top: 15px;
+    float: right;
+    display: flex;
+}
+
+.util ul::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.util li{
+    margin-left: 5px;
+}
+
+.util li a{
+    color: #222;
+}
+
+.util li>a{
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-size: 20px auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-indent: -99999px;
+}
+
+.util .h_search a{background-image: url("../img/h_search.png");}
+.util .h_login a{background-image: url("../img/h_login.png");}
+.util .h_menu a{background-image: url("../img/h_menu.png");}
+
+/* mobile - container */
+
+.main1{
+    position: relative;
+}
+
+.slides{
+    height: 100vh;
+    background-color: #000;
+}
+
+.slides:first-child{
+    position: relative;
+}
+
+.slides:first-child::before{
+    content:'';
+    display: block;
+    height: 40vh;
+    background-color: rgb(155, 9, 9);
+}
+
+.slides:first-child::after{
+    content:'';
+    display: block;
+    height: 60vh;
+    background-color: #000;
+}
+
+.menu{
+    position: absolute;
+    top: 40%;
+    left: 10%;
+}
+
+.menu .notice{
+    margin-bottom: 40px;
+}
+
+.menu li{
+    margin: 20px 0;
+}
+
+.menu li a{
+    font-size: 45px;
+    line-height: 1em;
+    color: #fff;
+    transition: letter-spacing 0.6s;
+}
+
+.menu li a:hover{
+    letter-spacing: 5px;
+    color: rgb(155, 9, 9);
+}
+
+.menu .notice a{
+    font-size: 65px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.slides img{
+    height: 100%;
+    object-fit: cover;
+    transform: scale(0.8);
+}
+
+.pager{
+    position: fixed;
+    top: 50%;
+    left: 4%;
+    transform: translate(0, -50%);
+}
+
+.pager ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pager li{
+    margin: 4px 0;
+}
+
+.pager li a{
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    text-indent: -99999px;
+}
+
+.pager .on a{
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* footer */
+
+#footer{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #000;
+    text-align: center;
+    color: #fff;
+    font-size: 30px;
+    line-height: 1em;
+}
+
+#footer div{
+    margin: 10px 0;
+}
+
+.top{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    padding-top: 10px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    background-color: #eee;
+    text-align: center;
+}
+
+/* side */
+
+.side{
+    position: absolute;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 100%;
+    background-color: #eee;
+    z-index: 600;
+}
+
+.side_close{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.side_close a{
+    display: block;
+    width: 60px;
+    height: 60px;
+    background-image: url("../img/side_close.png");
+    background-size: 100% auto;
+    text-indent: -99999px;
+}
+
+.side_box{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.side_box ul::before{
+    content: '';
+    display: block;
+    width: 30%;
+    height: 10px;
+    background-color: #222;
+}
+
+.side_box ul{
+    margin: 20px 0;
+}
+
+
+.side li{
+    margin: 10px 0;
+}
+
+.side li a{
+    color: #222;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 1.3em;
+}
+
+.side li a:hover{
+    text-decoration: line-through;
+    color: rgb(155, 9, 9)
+}
+
+/* 메모 
+1. CSS에서: 항상 "url"
+2. HTML에서
+1) link인 경우: "href"
+2) link가 아닌 경우(이미지, 비디오 등등): "src"
+
+*/
+
+/* tablet */
+@media screen and (min-width: 768px){
+    .side_box{
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        margin: 0 20px;
+    }
+    
+    .side_box ul::before{
+        content: '';
+        display: inline-block;
+        vertical-align: top;
+        width: 30%;
+        height: 10px;
+        background-color: #222;
+    }
+
+    .side .bar{
+        display: block;
+        width: 1px;
+        height: 100%;
+        background-color: #666;
+    }
+    
+    .side li a{
+    	font-size: 35px;
+	}
+}

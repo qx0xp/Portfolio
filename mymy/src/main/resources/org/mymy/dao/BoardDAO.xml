@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mymy.dao.BoardDAO">
+	<!-- 게시글 작성 -->
+	<insert id="boardWritePost">
+		insert into tbl_board(title, content, category, writer, id) VALUES(#{title}, #{content}, #{category}, #{writer}, #{id})
+	</insert>
+	
+	<!-- 게시판 리스트 불러오기 -->
+	<select id="boardList" resultType="org.mymy.model.BoardDTO">
+	select *
+	from (select @rownum:=@rownum+1 as rownum, b.*
+			from (select @rownum:=0) as tmp, tbl_board b
+			<if test="type!=null">
+				<choose>
+					<when test="type=='t'.toString()">
+						WHERE title LIKE CONCAT('%', #{keyword}, '%')
+					</when>
+					<when test="type=='c'.toString()">
+						WHERE content LIKE CONCAT('%', #{keyword}, '%')
+					</when>
+					<when test="type=='tc'.toString()">
+						WHERE (title LIKE CONCAT('%', #{keyword}, '%')
+						OR content LIKE CONCAT('%', #{keyword}, '%'))
+					</when>
+					<when test="type=='w'.toString()">
+						WHERE writer LIKE CONCAT('%', #{keyword}, '%')
+					</when>
+				</choose>
+			</if>
+			order by bno desc) as boardList
+	<![CDATA[
+	where rownum>(#{pageNum}-1)*#{amount} and rownum<=#{pageNum}*#{amount}
+	]]>
+	</select>
+	
+	<!-- 게시글 전체 건수 -->
+	<select id="getTotalCnt" resultType="int">
+		select count(*) from tbl_board
+		<if test="type!=null">
+			<choose>
+				<when test="type=='t'.toString()">
+					WHERE title LIKE CONCAT('%', #{keyword}, '%')
+				</when>
+				<when test="type=='c'.toString()">
+					WHERE content LIKE CONCAT('%', #{keyword}, '%')
+				</when>
+				<when test="type=='tc'.toString()">
+					WHERE title LIKE CONCAT('%', #{keyword}, '%')
+					OR content LIKE CONCAT('%', #{keyword}, '%')
+				</when>
+				<when test="type=='w'.toString()">
+					WHERE writer LIKE CONCAT('%', #{keyword}, '%')
+				</when>
+			</choose>
+		</if>
+	</select>
+	
+	<!-- 게시글 상세 조회  -->
+	<select id="boardDetail" resultType="org.mymy.model.BoardDTO">
+		select * from tbl_board where bno=#{bno}
+	</select>
+	
+	<!-- 게시글 조회시, 조회수 증가 -->
+	<update id="boardCntUp">
+		update tbl_board set count=count+1 where bno=#{bno}
+	</update>
+	
+	<!-- 게시글 수정 -->
+	<update id="boardModifyPost">
+		update tbl_board set title=#{title}, content=#{content}, category=#{category} where bno=#{bno}
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="boardRemove">
+		delete from tbl_board where bno=#{bno}
+	</delete>
+</mapper>
